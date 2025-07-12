@@ -26,7 +26,7 @@ export const ExperienceSection = () => {
       company: "HollowAI",
       location: "San Francisco, CA",
       period: "2023 - Present",
-      description: "Founded and leading a revolutionary smart home AI platform. Scaled from concept to 10K+ active users. Raised $2.5M in seed funding.",
+      description: "Founded and leading a revolutionary smart home AI platform. Scaled from concept to 10K+ active users.",
       achievements: [
         "Built AI-driven home automation systems for over 100,000 users",
         "Developed proprietary IoT communication protocols",
