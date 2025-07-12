@@ -41,7 +41,7 @@ export const HeroSection = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className={`transition-all duration-1000 ${isVisible ? 'slide-in-up' : ''}`}>
            
-          <h1 className="text-8xl md:text-[12rem] font-black mb-8 relative">
+          <h1 className="text-4xl md:text-[12rem] font-black mb-8 relative">
             <span className="bg-gradient-primary bg-clip-text text-transparent drop-shadow-2xl">
               FIZZ
             </span>
