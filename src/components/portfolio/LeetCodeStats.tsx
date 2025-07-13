@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Trophy, Target, TrendingUp } from "lucide-react";
 
 export const LeetCodeStats = () => {
+  const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [animatedCount, setAnimatedCount] = useState(0);
-  
+
   const totalProblems = 3386;
   const solvedProblems = 1047;
   const rank = 15000;
@@ -12,9 +13,9 @@ export const LeetCodeStats = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isVisible) {
           setIsVisible(true);
-          // Animate the counter
+
           let start = 0;
           const increment = solvedProblems / 100;
           const timer = setInterval(() => {
@@ -31,20 +32,26 @@ export const LeetCodeStats = () => {
       { threshold: 0.1 }
     );
 
-    const element = document.getElementById('leetcode');
-    if (element) observer.observe(element);
+    const section = sectionRef.current;
+    if (section) observer.observe(section);
 
     return () => observer.disconnect();
-  }, [solvedProblems]);
+  }, [isVisible, solvedProblems]);
 
   const progressPercentage = (solvedProblems / totalProblems) * 100;
 
   return (
-    <section id="leetcode" className="py-24 px-4 bg-gradient-to-br from-secondary/10 to-primary/5">
+    <section
+      ref={sectionRef}
+      id="leetcode"
+      className="py-24 px-4 bg-gradient-to-br from-secondary/10 to-primary/5"
+    >
       <div className="container mx-auto">
-        <div className={`text-center mb-20 ${isVisible ? 'slide-in-up' : 'opacity-0'}`}>
+        <div className={`text-center mb-20 ${isVisible ? "slide-in-up" : "opacity-0"}`}>
           <h2 className="text-6xl md:text-8xl font-black mb-8">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">LEETCODE MASTERY</span>
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
+              LEETCODE MASTERY
+            </span>
           </h2>
           <p className="text-2xl text-accent/80 max-w-4xl mx-auto leading-relaxed">
             Relentlessly honing algorithmic thinking and problem-solving skills through systematic practice.
@@ -52,9 +59,9 @@ export const LeetCodeStats = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {/* Stats Cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'slide-in-left delay-100' : 'opacity-0'}`}>
+            {/* Global Rank */}
+            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? "slide-in-left delay-100" : "opacity-0"}`}>
               <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trophy className="w-6 h-6 text-primary" />
               </div>
@@ -62,7 +69,8 @@ export const LeetCodeStats = () => {
               <p className="text-muted-foreground">Global Rank</p>
             </div>
 
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'scale-in delay-300' : 'opacity-0'}`}>
+            {/* Problems Solved */}
+            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? "scale-in delay-300" : "opacity-0"}`}>
               <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="w-6 h-6 text-accent" />
               </div>
@@ -70,7 +78,8 @@ export const LeetCodeStats = () => {
               <p className="text-muted-foreground">Problems Solved</p>
             </div>
 
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'slide-in-right delay-500' : 'opacity-0'}`}>
+            {/* Completion Rate */}
+            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? "slide-in-right delay-500" : "opacity-0"}`}>
               <div className="w-12 h-12 bg-blue-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <TrendingUp className="w-6 h-6 text-blue-400" />
               </div>
@@ -80,9 +89,9 @@ export const LeetCodeStats = () => {
           </div>
 
           {/* Progress Visualization */}
-          <div className={`glass-morphism p-8 rounded-2xl ${isVisible ? 'slide-in-up delay-700' : 'opacity-0'}`}>
+          <div className={`glass-morphism p-8 rounded-2xl ${isVisible ? "slide-in-up delay-700" : "opacity-0"}`}>
             <h3 className="text-2xl font-bold mb-6 text-center">Problem Solving Progress</h3>
-            
+
             {/* Progress Bar */}
             <div className="mb-6">
               <div className="flex justify-between text-sm text-muted-foreground mb-2">
@@ -90,33 +99,33 @@ export const LeetCodeStats = () => {
                 <span>{solvedProblems} / {totalProblems}</span>
               </div>
               <div className="w-full bg-secondary rounded-full h-4 overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-primary rounded-full transition-all duration-2000 ease-out"
-                  style={{ 
-                    width: isVisible ? `${progressPercentage}%` : '0%',
-                    transition: 'width 2s ease-out'
+                <div
+                  className="h-full bg-gradient-primary rounded-full"
+                  style={{
+                    width: isVisible ? `${progressPercentage}%` : "0%",
+                    transition: "width 2s ease-out"
                   }}
                 ></div>
               </div>
             </div>
 
-            {/* Visual Chart */}
+            {/* Mini Box Grid */}
             <div className="grid grid-cols-20 gap-1 max-w-2xl mx-auto">
               {Array.from({ length: totalProblems }, (_, index) => (
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-sm transition-all duration-1000 ${
-                    index < solvedProblems 
-                      ? 'bg-gradient-primary' 
-                      : 'bg-muted/30'
+                    index < solvedProblems
+                      ? "bg-gradient-primary"
+                      : "bg-muted/30"
                   }`}
-                  style={{ 
-                    transitionDelay: isVisible ? `${(index / solvedProblems) * 2}s` : '0s' 
+                  style={{
+                    transitionDelay: isVisible ? `${(index / solvedProblems) * 2}s` : "0s"
                   }}
                 ></div>
               ))}
             </div>
-            
+
             <div className="flex justify-between mt-4 text-sm text-muted-foreground">
               <span className="flex items-center">
                 <div className="w-3 h-3 bg-gradient-primary rounded mr-2"></div>
@@ -133,4 +142,3 @@ export const LeetCodeStats = () => {
     </section>
   );
 };
-export default LeetCodeStats;
