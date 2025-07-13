@@ -133,3 +133,4 @@ export const LeetCodeStats = () => {
     </section>
   );
 };
+export default LeetCodeStats;
