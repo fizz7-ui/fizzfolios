@@ -1,132 +1,70 @@
-import { useEffect, useState } from "react";
-import { Trophy, Target, TrendingUp } from "lucide-react";
+import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const LeetCodeStats = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [animatedCount, setAnimatedCount] = useState(0);
-  
-  const totalProblems = 3386;
-  const solvedProblems = 1047;
-  const rank = 15000;
+  const easy = { solved: 255, total: 885 };
+  const medium = { solved: 602, total: 1881 };
+  const hard = { solved: 197, total: 850 };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Animate the counter
-          let start = 0;
-          const increment = solvedProblems / 100;
-          const timer = setInterval(() => {
-            start += increment;
-            if (start >= solvedProblems) {
-              setAnimatedCount(solvedProblems);
-              clearInterval(timer);
-            } else {
-              setAnimatedCount(Math.floor(start));
-            }
-          }, 20);
-        }
+  const totalSolved = easy.solved + medium.solved + hard.solved;
+  const totalQuestions = easy.total + medium.total + hard.total;
+
+  const data = {
+    labels: ["Easy", "Medium", "Hard"],
+    datasets: [
+      {
+        label: "Problems Solved",
+        data: [easy.solved, medium.solved, hard.solved],
+        backgroundColor: ["#00d9ff", "#facc15", "#ef4444"],
+        borderWidth: 0,
       },
-      { threshold: 0.1 }
-    );
+    ],
+  };
 
-    const element = document.getElementById('leetcode');
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [solvedProblems]);
-
-  const progressPercentage = (solvedProblems / totalProblems) * 100;
+  const options = {
+    cutout: "70%",
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   return (
-    <section id="leetcode" className="py-24 px-4 bg-gradient-to-br from-secondary/10 to-primary/5">
-      <div className="container mx-auto">
-        <div className={`text-center mb-20 ${isVisible ? 'slide-in-up' : 'opacity-0'}`}>
-          <h2 className="text-6xl md:text-8xl font-black mb-8">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">LEETCODE MASTERY</span>
-          </h2>
-          <p className="text-2xl text-accent/80 max-w-4xl mx-auto leading-relaxed">
-            Relentlessly honing algorithmic thinking and problem-solving skills through systematic practice.
-          </p>
+    <section className="py-16 px-4 bg-zinc-900 text-white">
+      <div className="max-w-3xl mx-auto flex flex-col items-center">
+        <h2 className="text-4xl font-bold mb-6">LeetCode Progress</h2>
+
+        {/* Donut Chart */}
+        <div className="relative w-[300px] h-[300px] sm:w-[350px] sm:h-[350px]">
+          <Doughnut data={data} options={options} />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+            <span className="text-4xl font-bold">{totalSolved}</span>
+            <span className="text-sm text-gray-400">/ {totalQuestions} Solved</span>
+          </div>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Stats Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'slide-in-left delay-100' : 'opacity-0'}`}>
-              <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Trophy className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-3xl font-bold text-primary mb-2">{rank.toLocaleString()}</h3>
-              <p className="text-muted-foreground">Global Rank</p>
-            </div>
-
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'scale-in delay-300' : 'opacity-0'}`}>
-              <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="text-3xl font-bold text-accent mb-2">{animatedCount}</h3>
-              <p className="text-muted-foreground">Problems Solved</p>
-            </div>
-
-            <div className={`glass-morphism p-6 rounded-2xl text-center ${isVisible ? 'slide-in-right delay-500' : 'opacity-0'}`}>
-              <div className="w-12 h-12 bg-blue-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-6 h-6 text-blue-400" />
-              </div>
-              <h3 className="text-3xl font-bold text-blue-400 mb-2">{progressPercentage.toFixed(1)}%</h3>
-              <p className="text-muted-foreground">Completion Rate</p>
-            </div>
+        {/* Legend */}
+        <div className="mt-6 space-y-2 text-sm w-full max-w-xs">
+          <div className="flex justify-between">
+            <span className="text-cyan-400">Easy</span>
+            <span>{easy.solved} / {easy.total}</span>
           </div>
-
-          {/* Progress Visualization */}
-          <div className={`glass-morphism p-8 rounded-2xl ${isVisible ? 'slide-in-up delay-700' : 'opacity-0'}`}>
-            <h3 className="text-2xl font-bold mb-6 text-center">Problem Solving Progress</h3>
-            
-            {/* Progress Bar */}
-            <div className="mb-6">
-              <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                <span>Problems Solved</span>
-                <span>{solvedProblems} / {totalProblems}</span>
-              </div>
-              <div className="w-full bg-secondary rounded-full h-4 overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-primary rounded-full transition-all duration-2000 ease-out"
-                  style={{ 
-                    width: isVisible ? `${progressPercentage}%` : '0%',
-                    transition: 'width 2s ease-out'
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Visual Chart */}
-            <div className="grid grid-cols-12 gap-1 max-w-2xl mx-auto">
-              {Array.from({ length: totalProblems }, (_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-sm transition-all duration-1000 ${
-                    index < solvedProblems 
-                      ? 'bg-gradient-primary' 
-                      : 'bg-muted/30'
-                  }`}
-                  style={{ 
-                    transitionDelay: isVisible ? `${(index / solvedProblems) * 2}s` : '0s' 
-                  }}
-                ></div>
-              ))}
-            </div>
-            
-            <div className="flex justify-between mt-4 text-sm text-muted-foreground">
-              <span className="flex items-center">
-                <div className="w-3 h-3 bg-gradient-primary rounded mr-2"></div>
-                Solved ({solvedProblems})
-              </span>
-              <span className="flex items-center">
-                <div className="w-3 h-3 bg-muted/30 rounded mr-2"></div>
-                Remaining ({totalProblems - solvedProblems})
-              </span>
-            </div>
+          <div className="flex justify-between">
+            <span className="text-yellow-400">Medium</span>
+            <span>{medium.solved} / {medium.total}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-red-400">Hard</span>
+            <span>{hard.solved} / {hard.total}</span>
           </div>
         </div>
       </div>
