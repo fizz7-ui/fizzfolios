@@ -22,6 +22,7 @@ const Index = () => {
         <AboutSection />
         <SkillsSection />
         <ExperienceSection />
+        <LeetCodeStats />
         <AchievementsSection />
         <ProjectsSection />
         <TestimonialsSection />
