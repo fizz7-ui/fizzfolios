@@ -101,7 +101,7 @@ export const LeetCodeStats = () => {
             </div>
 
             {/* Visual Chart */}
-            <div className="grid grid-cols-20 gap-1 max-w-2xl mx-auto">
+            <div className="grid grid-cols-12 gap-1 max-w-2xl mx-auto">
               {Array.from({ length: totalProblems }, (_, index) => (
                 <div
                   key={index}
