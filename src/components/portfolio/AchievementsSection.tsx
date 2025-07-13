@@ -51,9 +51,8 @@ export const AchievementsSection = () => {
       icon: Award,
       title: "Innovation Awards",
       items: [
-        "🏆 Best IoT Innovation 2024 - Tech Awards",
+        "🏆 Best project award - WICE 2025",
         "🥇 Startup of the Year - Bay Area Tech Summit",
-        "⭐ Y Combinator Top 1% - 2023 Batch",
         "🚀 Forbes 30 Under 30 - Technology 2024"
       ]
     },
@@ -64,16 +63,14 @@ export const AchievementsSection = () => {
         "📰 Featured in TechCrunch - 'The Future of Smart Homes'",
         "📺 Keynote Speaker - RoboCon 2024",
         "📝 Published in IEEE Robotics - 3 Research Papers",
-        "🎤 TEDx Talk - 'AI in Everyday Life' (500K+ views)"
       ]
     },
     {
       icon: TrendingUp,
       title: "Professional Milestones",
       items: [
-        "💼 Led engineering teams at 4 Fortune 500 companies",
-        "📈 Scaled systems serving 100M+ users globally",
-        "💡 Hold 8 patents in robotics and AI",
+        "💼 Led engineering teams at 4 Fortune 12 companies",
+        "📈 Scaled systems serving 10k users globally",
         "🎯 Achieved 99.9% system uptime across all projects"
       ]
     },
@@ -84,7 +81,6 @@ export const AchievementsSection = () => {
         "👨‍🏫 Mentored 50+ engineers in their careers",
         "🌍 Open-source contributions to 20+ major projects",
         "🎓 Guest lecturer at Stanford and MIT",
-        "💖 Donated $100K+ to coding education nonprofits"
       ]
     }
   ];
