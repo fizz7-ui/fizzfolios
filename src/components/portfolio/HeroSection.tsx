@@ -49,6 +49,8 @@ export const HeroSection = () => {
               FIZZ
             </div>
           </h1>
+          <br/>
+          <br />
         </div>
         
         <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'slide-in-up' : ''}`}>
