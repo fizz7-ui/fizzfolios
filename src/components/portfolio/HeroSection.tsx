@@ -4,11 +4,50 @@ import { Button } from "@/components/ui/button";
 
 export const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [stats, setStats] = useState({
+    totalSolved: 0,
+    totalQuestions: 0,
+    ranking: 0,
+    easySolved: 0,
+    mediumSolved: 0,
+    hardSolved: 0,
+    easyTotal: 0,
+    mediumTotal: 0,
+    acceptanceRate: 0, 
+    hardTotal: 0,
+  });
 
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch("https://leetcode-stats-api.herokuapp.com/ice__fizz");
+        const data = await res.json();
+        setStats({
+          totalSolved: data.totalSolved,
+          totalQuestions: data.totalQuestions,
+          ranking: data.ranking,
+          easySolved: data.easySolved,
+          mediumSolved: data.mediumSolved,
+          hardSolved: data.hardSolved,
+          easyTotal: data.totalEasy,
+          acceptanceRate: data.acceptanceRate,
+          mediumTotal: data.totalMedium,
+          hardTotal: data.totalHard,
+        });
+      } catch (err) {
+        console.error("Failed to fetch LeetCode stats", err);
+      }
+    };
+
+    fetchStats();
+  }, []);
   useEffect(() => {
     setIsVisible(true);
   }, []);
-
+  const solvedProblems = stats.totalSolved;
+  const totalProblems = stats.totalQuestions;
+  const rank = stats.ranking;
+  
   const scrollToNext = () => {
     const aboutSection = document.getElementById('about');
     aboutSection?.scrollIntoView({ behavior: 'smooth' });
@@ -76,10 +115,10 @@ export const HeroSection = () => {
         <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'slide-in-up' : ''}`}>
           <div className="flex justify-center space-x-8 mb-12 flex-wrap gap-4">
             <div className="glass-morphism px-8 py-4 rounded-full glow-blue transform hover:scale-105 transition-transform">
-              <span className="text-primary font-bold text-lg">🏆 LeetCode Rank: 15,000</span>
+              <span className="text-primary font-bold text-lg">🏆 LeetCode Rank: {rank.toLocaleString()}</span>
             </div>
             <div className="glass-morphism px-8 py-4 rounded-full glow-white transform hover:scale-105 transition-transform">
-              <span className="text-white font-bold text-lg">⚡ Problems Solved: 1,047</span>
+              <span className="text-white font-bold text-lg">⚡ Problems Solved: {solvedProblems.toLocaleString()}</span>
             </div>
             <div className="glass-morphism px-8 py-4 rounded-full glow-electric transform hover:scale-105 transition-transform">
               <span className="text-primary font-bold text-lg">🚀 HollowAI Founder</span>
