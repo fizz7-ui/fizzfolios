@@ -88,7 +88,7 @@ export const ProjectsSection = () => {
                 <div className="mb-8">
                   <h4 className="text-lg font-semibold mb-4">Tech Stack</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['React Native', 'Node.js', 'IoT', 'AI/ML', 'MongoDB', 'Socket.io'].map((tech) => (
+                    {['Flutter', 'Node.js', 'IoT', 'AI/ML', 'FirebaseDB', 'ESP32'].map((tech) => (
                       <span key={tech} className="px-3 py-1 bg-secondary rounded-full text-sm">
                         {tech}
                       </span>

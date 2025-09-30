@@ -49,40 +49,19 @@ export const AchievementsSection = () => {
   const achievements = [
     {
       icon: Award,
-      title: "Innovation Awards",
+      title: "Science Fair",
       items: [
-        "🏆 Best project award - WICE 2025",
-        "🥇 Startup of the Year - Bay Area Tech Summit",
-        "🚀 Forbes 30 Under 30 - Technology 2024"
+        "🥉 3rd place - Junior - BSCIR 2025",
+        "🥉 3rd place - Junior - NDC Annual 2024",
       ]
     },
     {
       icon: Star,
-      title: "Recognition & Features",
+      title: "Global Awards",
       items: [
-        "📰 Featured in TechCrunch - 'The Future of Smart Homes'",
-        "📺 Keynote Speaker - RoboCon 2024",
-        "📝 Published in IEEE Robotics - 3 Research Papers",
-      ]
+        "🥇 Gold Medalist - WICE 2025",
+        ]
     },
-    {
-      icon: TrendingUp,
-      title: "Professional Milestones",
-      items: [
-        "💼 Led engineering teams at 4 Fortune 12 companies",
-        "📈 Scaled systems serving 10k users globally",
-        "🎯 Achieved 99.9% system uptime across all projects"
-      ]
-    },
-    {
-      icon: Users,
-      title: "Community Impact",
-      items: [
-        "👨‍🏫 Mentored 50+ engineers in their careers",
-        "🌍 Open-source contributions to 20+ major projects",
-        "🎓 Guest lecturer at Stanford and MIT",
-      ]
-    }
   ];
 
   const stats = [
