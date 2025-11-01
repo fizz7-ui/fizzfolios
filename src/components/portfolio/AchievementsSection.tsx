@@ -64,32 +64,7 @@ export const AchievementsSection = () => {
     },
   ];
 
-  const stats = [
-    {
-      icon: Code,
-      value: counters.projects,
-      label: "Projects Completed",
-      suffix: "+"
-    },
-    {
-      icon: Users,
-      value: counters.users,
-      label: "Users Impacted",
-      suffix: "+"
-    },
-    {
-      icon: Zap,
-      value: counters.lines,
-      label: "Lines of Code",
-      suffix: "+"
-    },
-    {
-      icon: TrendingUp,
-      value: counters.companies,
-      label: "Companies Worked With",
-      suffix: "+"
-    }
-  ];
+
 
   return (
     <section id="achievements" className="py-24 px-4 bg-gradient-to-br from-background via-secondary/5 to-primary/5">
@@ -104,19 +79,7 @@ export const AchievementsSection = () => {
         </div>
 
         {/* Stats Counter */}
-        <div className={`grid md:grid-cols-4 gap-8 mb-20 max-w-6xl mx-auto ${isVisible ? 'scale-in delay-300' : 'opacity-0'}`}>
-          {stats.map((stat, index) => (
-            <div key={stat.label} className="glass-morphism p-8 rounded-3xl text-center hover:glow-blue transition-all duration-500 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <stat.icon className="w-8 h-8 text-black" />
-              </div>
-              <div className="text-4xl font-black text-primary mb-2">
-                {stat.value.toLocaleString()}{stat.suffix}
-              </div>
-              <div className="text-accent/80 font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+       
 
         {/* Achievement Categories */}
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
