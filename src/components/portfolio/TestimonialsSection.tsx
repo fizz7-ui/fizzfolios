@@ -204,7 +204,7 @@ export const TestimonialsSection = () => {
                 <div className="text-accent/80">LinkedIn Recommendations</div>
               </div>
               <div>
-                <div className="text-4xl font-black text-primary mb-2">50+</div>
+                <div className="text-4xl font-black text-primary mb-2">39+</div>
                 <div className="text-accent/80">Client Projects</div>
               </div>
               <div>
