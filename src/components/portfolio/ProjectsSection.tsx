@@ -141,13 +141,13 @@ export const ProjectsSection = () => {
           <h4 className="text-xl font-semibold mb-6">Recognition</h4>
           <div className="flex justify-center space-x-8 flex-wrap">
             <div className="glass-morphism px-6 py-3 rounded-full mb-4">
-              <span className="text-primary font-medium">🏆 Best IoT Innovation 2024</span>
+              <span className="text-primary font-medium">🏆Gold Medal in WICE 2025</span>
             </div>
             <div className="glass-morphism px-6 py-3 rounded-full mb-4">
-              <span className="text-accent font-medium">⭐ Top Startup Award</span>
+              <span className="text-accent font-medium">⭐ BCSIR Science Fair Runner-up</span>
             </div>
             <div className="glass-morphism px-6 py-3 rounded-full mb-4">
-              <span className="text-blue-400 font-medium">🚀 Y Combinator Finalist</span>
+              <span className="text-blue-400 font-medium">🚀 Notre Dame Annual Fair runner up</span>
             </div>
           </div>
         </div>
